@@ -2,11 +2,13 @@
 
 int error_getline(char *word)
 {
-	if(word == NULL)
+	if( _strcmp(word, " ") == 0 || _strcmp(word, "\r") == 0 ||
+	    _strcmp(word, "\v") == 0 ||
+	    _strcmp(word, "\n") == 0 || _strcmp (word, "\f") == 0)
 	{
-		printf("Es NULL");
-		return (1);
+		free(word);
+		return (0);
 	}
 	else
-		return (0);
+		return (1);
 }

@@ -1,45 +1,55 @@
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-int cont_word(char * palabra);
+#include "holberton.h"
 extern char **environ;
 
-typedef struct nodo
+char *search_path(char *comand)
 {
-	char *word;
-	struct nodo *next;
-} new_nodo;
+	char **get_array = NULL, *word, *result_execute = NULL;
+	int i;
 
+	get_array = create_array();
 
-new_nodo *add_node(new_nodo **head, char *str)
-{
-	new_nodo *node;
+	for (i = 0; get_array[i] != NULL; i++)
+	{
+		word = _strncpy(get_array[i], comand);
+		get_array[i] = word;
+	}
 
-	node = malloc(sizeof(new_nodo));
-
-	node->word = str;
-	node->next = *head;
-	*head = node;
-
-	return(node);
+	result_execute = _execute(get_array);
+	return (result_execute);
 }
 
 
-int main()
+char * _execute(char **path_comand)
 {
-	int i = 0, box = 1, lenght_palabra = 0, cont = 0, j, y;
-	char *word, *aux, *str_tok;
-	char *palabra = "PATH";
-	new_nodo *head, *pr_nodo;
+	int i;
 
-	head = NULL;
+	for (i = 0; path_comand[i] != NULL; i++)
+	{
+		if (access(path_comand[i], F_OK) == 0)
+		{
+			return (path_comand[i]);
+			break;
+		}
+	}
+}
 
-	lenght_palabra = cont_word(palabra);
+
+
+
+
+char **create_array()
+{
+	int i = 0, lenght_palabra = 0, cont = 0, j, y, iterator = 1;
+	char *aux, **str_tok, *palabra = "PATH", *word;
+	char *s2 = NULL;
+
+	lenght_palabra = _strlenght(palabra);
+	str_tok = malloc(1024 * sizeof(char));
+
 
 	while(environ[i] != NULL)
 	{
+
 		aux = environ[i];
 
 		for (y = 0, j = 0; y < lenght_palabra; y++, j++)
@@ -50,28 +60,22 @@ int main()
 
        		if(cont == lenght_palabra)
 		{
-			str_tok = strtok(environ[i], "=");
-			while(str_tok != NULL)
+			s2 = strdup(environ[i]);
+			word =  strtok(s2, "=");
+			word = strtok(NULL, "=");
+			word = strtok(word, ":");
+			str_tok[0] = word;
+
+			while(word != NULL)
 			{
-				str_tok = strtok(NULL, ":");
-				if(str_tok != NULL)
-				{
-					printf(" %s\n", str_tok);
-					pr_nodo = add_node(&head, str_tok);
-				}
+				word = strtok(NULL, ":");
+				str_tok[iterator] = word;
+				iterator++;
 			}
 			break;
 		}
 		i++;
 	}
-}
 
-int cont_word(char * palabra)
-{
-	int i;
-
-	for(i = 0; palabra[i] != '\0'; i++)
-	{}
-
-	return (i);
+	return (str_tok);
 }
