@@ -7,8 +7,9 @@ char *search_path(char *comand)
 	int i;
 
 	get_array = create_array();
-
-	for (i = 0; get_array[i] != NULL; i++)
+	if (comand == NULL)
+	  comand = " ";
+       	for (i = 0; get_array[i] != NULL; i++)
 	{
 		word = _strncpy(get_array[i], comand);
 		get_array[i] = word;

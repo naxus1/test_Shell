@@ -30,7 +30,7 @@ char *_strncpy(char *path, char *comand)
 	int suma = lenght_path + lenght_comand + 1;
 
 	new_string = malloc(sizeof(char) * suma);
-
+	  
 	for (i = 0; i < lenght_path  && path[i] != '\0'; i++)
 	{
 		new_string[i] = path[i];
