@@ -4,14 +4,15 @@ int main(int argc, char * argv[])
 {
 	char *buff_word;
 	size_t bufsize;
-	char  **word_get;
+	char  **word_get, **aux_o;
 	int i;
 
 	while(1)
 	{
 		buff_word = NULL;
 		bufsize = 0;
-		printf("$ ");
+		if (isatty(0) != 0 )
+		  printf("$_ ");
 		i = getline(&buff_word, &bufsize, stdin);
 		
 		if (_strcmp(buff_word, "exit") == 0)
@@ -19,10 +20,12 @@ int main(int argc, char * argv[])
 		
 		if (i != 1 && i != -1)
 		  {
-		    word_get = token(buff_word);
-		    if (file_axist(word_get) != 0)
- 			word_get[0] = search_path(word_get[0]);
-
+		       word_get = token(buff_word);
+		       word_get[0] = search_path(word_get[0]);
+		      
+		       if (_strcmp(word_get[0], "NO") == 0)
+			 continue;
+		     		     		 
 		    if (fork() == 0)
 		      {
 			if (word_get[0] == NULL)

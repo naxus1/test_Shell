@@ -6,17 +6,29 @@ char *search_path(char *comand)
 	char **get_array = NULL, *word, *result_execute = NULL;
 	int i;
 
-	get_array = create_array();
 	if (comand == NULL)
-	  comand = " ";
-       	for (i = 0; get_array[i] != NULL; i++)
-	{
+	  {
+	    result_execute = "NO";
+	    return (result_execute);
+	  }
+	else
+	  {
+	    get_array = create_array();
+	    for (i = 0; get_array[i] != NULL; i++)
+	      {
 		word = _strncpy(get_array[i], comand);
 		get_array[i] = word;
-	}
+	      }
+	    
+	    result_execute = _execute(get_array);
 
-	result_execute = _execute(get_array);
-	return (result_execute);
+	    if(_strcmp(result_execute, "NO") == 0)
+	      {
+		result_execute = comand;
+	      }
+	    return (result_execute);
+
+	  }
 }
 
 
@@ -32,6 +44,9 @@ char * _execute(char **path_comand)
 			break;
 		}
 	}
+
+	return ("NO");
+
 }
 
 
