@@ -1,6 +1,8 @@
 #ifndef _SHELL_H_
 #define _SHELL_H_
 
+extern char **environ;
+
 #include <string.h>
 #include <stdarg.h>
 #include <fcntl.h>
@@ -12,6 +14,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
+char *_strdup(char *str_last);
 int cont_word(char * palabra);
 char **token(char *buff_word);
 int _strcmp(const char *s1, const char *s2);
