@@ -14,6 +14,7 @@ extern char **environ;
 #include <stdio.h>
 #include <unistd.h>
 
+int execute_execve(char **comand);
 char *_strdup(char *str_last);
 int cont_word(char * palabra);
 char **token(char *buff_word);

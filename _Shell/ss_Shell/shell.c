@@ -10,7 +10,7 @@ int main(void)
 	size_t bufsize;
 	int i, r_current = 0;
 
-	while(i != -1)
+	while (i != -1)
 	{
 		buff_word = NULL;
 		bufsize = 0;
@@ -35,14 +35,7 @@ int main(void)
 				free(buff_word);
 				continue;
 			}
-			if (fork() == 0)
-			{
-				if (execve(w_get[0], w_get, environ) == -1)
-					perror("--Error: ");
-				break;
-			}
-			else
-				wait(NULL);
+			execute_execve(w_get);
 		}
 	}
 	free(buff_word);
