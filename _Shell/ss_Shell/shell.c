@@ -8,7 +8,7 @@ int main(void)
 {
 	char *buff_word, **w_get, *aux_word = NULL;
 	size_t bufsize;
-	int i, r_current = 0;
+	int i = 1, r_current = 0;
 
 	while (i != -1)
 	{
@@ -36,6 +36,8 @@ int main(void)
 				continue;
 			}
 			execute_execve(w_get);
+			free(buff_word);
+
 		}
 	}
 	free(buff_word);

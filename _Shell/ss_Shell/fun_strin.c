@@ -8,6 +8,7 @@
 int _strcmp(const char *s1, const char *s2)
 {
 	int i = 0;
+
 	while (s1[i] != '\0' && s2[i] != '\0')
 	{
 		if (s1[i] != s2[i])
@@ -20,7 +21,7 @@ int _strcmp(const char *s1, const char *s2)
 }
 
 /**
- * _strcpy - copy string to new dest
+ * _strncpy - copy string to new dest
  * @path: where the string is being assigned
  * @comand: fingered command.
  * Return: pointer to destination
@@ -54,10 +55,11 @@ char *_strncpy(char *path, char *comand)
  * @string_ptr: string passed
  * Return: integer
  */
-int _strlenght(char * string_ptr)
+int _strlenght(char *string_ptr)
 {
 	int i;
-	for(i = 0; string_ptr[i] != '\0'; i++)
+
+	for (i = 0; string_ptr[i] != '\0'; i++)
 	{}
 	return (i);
 }
@@ -65,7 +67,7 @@ int _strlenght(char * string_ptr)
 
 /**
  * _strdup - function returns pointer to new string
- * @str: string that is being passed
+ * @str_last: string that is being passed
  * Return: pointer
  */
 char *_strdup(char *str_last)
